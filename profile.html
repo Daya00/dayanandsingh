@@ -95,13 +95,18 @@
                 </div>
             </div>
             <!-- Profile Placeholder (Add your image here) -->
-            <div class="md:w-1/3 mt-10 md:mt-0 flex justify-center">
-                <div class="w-48 h-48 md:w-64 md:h-64 bg-gray-700 rounded-full flex items-center justify-center border-4 border-gray-600 shadow-xl overflow-hidden">
-                    <i class="fas fa-user text-6xl text-gray-500"></i>
-                    <!-- Uncomment line below and add image path -->
-                    <img src="profile.jpeg" alt="Dayanand Singh" class="w-full h-full object-cover">
-                </div>
-            </div>
+<div class="md:w-1/3 mt-10 md:mt-0 flex justify-center">
+    <div class="relative w-48 h-48 md:w-64 md:h-64 bg-gray-700 rounded-full flex items-center justify-center border-4 border-gray-600 shadow-xl overflow-hidden">
+        <i class="fas fa-user text-6xl text-gray-500"></i>
+
+        <img 
+            src="profile.jpeg" 
+            alt="Dayanand Singh" 
+            class="absolute inset-0 w-full h-full object-cover rounded-full"
+        >
+    </div>
+</div>
+
         </div>
     </header>
 

@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Frontend Learning Notes</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f6f8;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: #111827;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      z-index: 1000;
+    }
+
+    header button {
+      background: none;
+      border: none;
+      color: #9ca3af;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 8px 14px;
+      border-radius: 6px;
+    }
+
+    header button.active {
+      background: #2563eb;
+      color: white;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    main {
+      padding-top: 80px; /* space for fixed header */
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    section {
+      display: none;
+      animation: fadeIn 0.3s ease-in;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    /* ===== PLACEHOLDER CONTAINER STYLE ===== */
+    .unit-container {
+      background: white;
+      margin-bottom: 20px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .unit-container h2 {
+      color: #2563eb;
+      margin-bottom: 10px;
+    }
+
+    .unit-container p {
+      color: #374151;
+      line-height: 1.6;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #eef2ff, #fdf2f8);
+      padding: 30px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      background: linear-gradient(to right, #2563eb, #7c3aed);
+      color: white;
+      padding: 20px;
+      border-radius: 14px;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    .blue { border-left: 8px solid #2563eb; }
+    .green { border-left: 8px solid #16a34a; }
+    .orange { border-left: 8px solid #f97316; }
+    .red { border-left: 8px solid #dc2626; }
+    .purple { border-left: 8px solid #7c3aed; }
+
+    h2 {
+      margin-top: 0;
+      color: #1f2937;
+    }
+
+    pre {
+      background: #f3f4f6;
+      padding: 15px;
+      border-radius: 10px;
+      overflow-x: auto;
+    }
+
+    .flow {
+      font-weight: bold;
+      text-align: center;
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #1e40af;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 14px;
+      margin-right: 8px;
+    }
+
+    .table-wrapper {
+  overflow-x: auto;
+  margin-top: 15px;
+}
+
+.fancy-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  font-size: 15px;
+}
+
+.fancy-table thead th {
+  padding: 14px;
+  color: white;
+  text-align: center;
+  font-weight: 600;
+}
+
+.fancy-table thead th:nth-child(1) {
+  background: #334155;
+}
+
+.fancy-table thead th:nth-child(2) {
+  background: linear-gradient(to right, #0ea5e9, #38bdf8);
+}
+
+.fancy-table thead th:nth-child(3) {
+  background: linear-gradient(to right, #22c55e, #4ade80);
+}
+
+.fancy-table tbody td {
+  padding: 14px;
+  text-align: center;
+  background: #f8fafc;
+  border-bottom: 1px solid #e5e7eb;
+  transition: all 0.25s ease;
+}
+
+.fancy-table tbody tr:hover td {
+  background: #e0f2fe;
+  transform: scale(1.01);
+}
+
+.fancy-table tbody td:first-child {
+  font-weight: 600;
+  background: #f1f5f9;
+}
+
+@media (max-width: 600px) {
+  .fancy-table {
+    font-size: 14px;
+  }
+}
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== FIXED HEADER ===== -->
+  <header>
+    <button class="tab active" onclick="showSection('javascript')">JavaScript</button>
+    <button class="tab" onclick="showSection('react')">React</button>
+    <button class="tab" onclick="showSection('htmlcss')">HTML & CSS</button>
+  </header>
+
+  <!-- ===== MAIN AREA ===== -->
+  <main>
+
+    <!-- ===== JAVASCRIPT SECTION ===== -->
+    <section id="javascript" class="active">
+      <!-- Paste your 31 JavaScript containers here -->
+
+      <div class="unit-container">
+        <div class="container">
+
+  <h1>📢 JavaScript Custom Events<br><small>(Easy & Interview-Ready)</small></h1>
+
+  <!-- Step 1 -->
+  <div class="card blue">
+    <h2>1️⃣ Create a Custom Event</h2>
+    <p>
+      👉 Custom event banane ke liye <b>CustomEvent</b> constructor use hota hai
+    </p>
+    <pre>
+const userLoggedIn = new CustomEvent("userLoggedIn", {
+  detail: {
+    userId: 101,
+    name: "Dayanand"
+  }
+});
+    </pre>
+    <p>📌 <b>detail</b> → Event ke sath data pass karne ke liye</p>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="card green">
+    <h2>2️⃣ Dispatch (Trigger) the Event</h2>
+    <pre>
+document.dispatchEvent(userLoggedIn);
+    </pre>
+    <p>🔔 Event dispatch ho sakta hai:</p>
+    <ul>
+      <li>document</li>
+      <li>window</li>
+      <li>Any DOM element</li>
+    </ul>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="card orange">
+    <h2>3️⃣ Listen to the Custom Event</h2>
+    <pre>
+document.addEventListener("userLoggedIn", (event) => {
+  console.log("User Logged In:", event.detail);
+});
+    </pre>
+    <p>✅ Output:</p>
+    <pre>
+User Logged In: { userId: 101, name: "Dayanand" }
+    </pre>
+  </div>
+
+  <!-- Step 4 -->
+  <div class="card purple">
+    <h2>4️⃣ Real-World Example (Button → App Event)</h2>
+    <p>🔘 Button fires custom event</p>
+    <pre>
+<button id="loginBtn">Login</button>
+
+document.getElementById("loginBtn")
+  .addEventListener("click", () => {
+    const loginEvent = new CustomEvent("loginSuccess", {
+      detail: { role: "Admin" }
+    });
+
+    window.dispatchEvent(loginEvent);
+});
+    </pre>
+
+    <p>📢 App listens to it</p>
+    <pre>
+window.addEventListener("loginSuccess", (e) => {
+  console.log("Role:", e.detail.role);
+});
+    </pre>
+  </div>
+
+  <!-- Comparison -->
+ <!-- Interactive Comparison Table -->
+<div class="card blue">
+  <h2>5️⃣ Custom Event vs Normal Event (Interactive)</h2>
+
+  <div class="table-wrapper">
+    <table class="fancy-table">
+      <thead>
+        <tr>
+          <th>⚙️ Feature</th>
+          <th>🌐 Normal Event</th>
+          <th>🚀 Custom Event</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Who creates</td>
+          <td>Browser</td>
+          <td>You (Developer)</td>
+        </tr>
+        <tr>
+          <td>Examples</td>
+          <td>click, input</td>
+          <td>userLoggedIn</td>
+        </tr>
+        <tr>
+          <td>Data passing</td>
+          <td>Limited</td>
+          <td>detail object</td>
+        </tr>
+        <tr>
+          <td>Use case</td>
+          <td>UI interactions</td>
+          <td>App / Module communication</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="margin-top:12px;">
+    💡 <b>Tip:</b> Custom Events are best when you want
+    <b>decoupled communication</b> between modules.
+  </p>
+</div>
+
+
+  <!-- Interview -->
+  <div class="card red">
+    <h2>6️⃣ Why Interviewers Love This 😎</h2>
+    <ul>
+      <li>Micro-frontend communication</li>
+      <li>Decoupling modules</li>
+      <li>Global app notifications</li>
+      <li>Analytics / logging</li>
+      <li>Replacing prop drilling (non-React)</li>
+    </ul>
+  </div>
+
+  <!-- One Line -->
+  <div class="card green">
+    <h2>7️⃣ One-Line Interview Answer 🎯</h2>
+    <p>
+      👉 <b>
+        Custom Events in JavaScript allow developers to define and dispatch their own events with custom data using CustomEvent, enabling decoupled and scalable communication between components.
+      </b>
+    </p>
+    <div>
+      <span class="tag">Interview</span>
+      <span class="tag">JavaScript</span>
+      <span class="tag">CustomEvent</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="container">
+
+  <h1>🧠 JavaScript Prototype<br><small>(Easy Explanation)</small></h1>
+
+  <!-- What is Prototype -->
+  <div class="card blue">
+    <h2>🔵 What is a Prototype?</h2>
+    <p>
+      👉 Prototype ek <b>backup object</b> hota hai<br>
+      👉 Jab object me property / method nahi milti, JavaScript prototype me dekhta hai
+    </p>
+    <p>🧠 <i>“Agar yaha nahi mila, parent se puch lo”</i></p>
+  </div>
+
+  <!-- Example -->
+  <div class="card green">
+    <h2>🟢 Simple Example</h2>
+    <pre>
+let person = {
+  name: "Rahul"
+};
+
+console.log(person.toString());
+    </pre>
+    <p>❓ <b>toString()</b> person ke andar hai? ❌</p>
+    <p>✔️ JavaScript ne prototype me dhunda</p>
+  </div>
+
+  <!-- Prototype Chain -->
+  <div class="card orange">
+    <h2>🧬 Prototype Chain</h2>
+    <div class="flow">
+      person ➜ person.__proto__ ➜ Object.prototype ➜ null
+    </div>
+    <p style="text-align:center;">📌 Is process ko kehte hain <b>Prototype Chain</b></p>
+  </div>
+
+  <!-- How it works -->
+  <div class="card purple">
+    <h2>🟡 How it Works (Steps)</h2>
+    <ol>
+      <li>JavaScript object ke andar dekhta hai</li>
+      <li>Nahi mila → prototype me</li>
+      <li>Next prototype me check</li>
+      <li>Mil gaya ya <b>null</b> → stop</li>
+    </ol>
+  </div>
+
+  <!-- Interview Trap -->
+  <div class="card red">
+    <h2>🔴 Interview Trap</h2>
+    <p>❌ Prototype = Copy</p>
+    <p>✅ Prototype = <b>Shared Reference</b></p>
+  </div>
+
+  <!-- One Line -->
+  <div class="card blue">
+    <h2>🎯 One-Line Interview Answer</h2>
+    <p>
+      👉 <b>Prototype is a hidden object that allows JavaScript objects to share properties and methods.</b>
+    </p>
+    <div>
+      <span class="tag">Interview</span>
+      <span class="tag">JavaScript</span>
+      <span class="tag">Prototype</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="container">
+
+  <h1>⏳ Debouncing in JavaScript & React<br><small>(Easy + Interview Friendly)</small></h1>
+
+  <!-- Problem -->
+  <div class="card red">
+    <h2>🔁 Problem samjho pehle</h2>
+    <p>Socho tum search box me type kar rahe ho:</p>
+    <pre>
+r → re → rea → reac → react
+    </pre>
+    <ul>
+      <li>❌ Har key press par API call</li>
+      <li>❌ Too many API calls</li>
+      <li>❌ Slow app</li>
+    </ul>
+  </div>
+
+  <!-- What is Debounce -->
+  <div class="card green">
+    <h2>✅ Debouncing kya karta hai?</h2>
+    <p>
+      <b>Debouncing = Thoda ruk kar kaam karna</b><br>
+      Jab user typing band karta hai (kuch time ke liye),
+      tab sirf <b>ek baar</b> function run hota hai
+    </p>
+    <p>📌 Example:</p>
+    <pre>
+"User ne 500ms tak kuch type nahi kiya → ab API call karo"
+    </pre>
+  </div>
+
+  <!-- Real Life -->
+  <div class="card blue">
+    <h2>🧠 Real Life Example</h2>
+    <p>🔔 <b>Lift ka button</b></p>
+    <ul>
+      <li>Tum button dabaate jaate ho</li>
+      <li>Lift rukti nahi, wait karti hai</li>
+      <li>Jab sab ruk jaate hain → lift chalti hai</li>
+    </ul>
+    <p>➡️ <b>SAME = Debouncing</b></p>
+  </div>
+
+  <!-- Without Debounce -->
+  <div class="card red">
+    <h2>❌ Without Debounce</h2>
+    <pre>
+function searchApi(text) {
+  console.log("API call for:", text);
+}
+    </pre>
+    <p>👉 Har key press par API call ho jaayega</p>
+  </div>
+
+  <!-- Debounce Function -->
+  <div class="card purple">
+    <h2>🧩 Debounce Function (Easy Version)</h2>
+    <pre>
+function debounce(fn, delay) {
+  let timer;
+
+  return function (...args) {
+    clearTimeout(timer);
+
+    timer = setTimeout(() => {
+      fn(...args);
+    }, delay);
+  };
+}
+    </pre>
+  </div>
+
+  <!-- Usage -->
+  <div class="card green">
+    <h2>🎯 Use Debounce</h2>
+    <pre>
+function searchApi(text) {
+  console.log("API call for:", text);
+}
+
+const debouncedSearch = debounce(searchApi, 500);
+
+// Imagine this runs on keyup
+debouncedSearch("r");
+debouncedSearch("re");
+debouncedSearch("rea");
+debouncedSearch("react");
+    </pre>
+    <p>
+      👉 Result: Sirf last value <b>"react"</b> ke liye API call hogi
+      (500ms baad)
+    </p>
+  </div>
+
+  <!-- Timeline -->
+  <div class="card blue">
+    <h2>📌 Timeline Samjho</h2>
+    <pre>
+Type r     → wait
+Type re    → timer reset
+Type rea   → timer reset
+Type react → wait 500ms → API CALL 🔥
+    </pre>
+  </div>
+
+  <!-- React Example -->
+  <div class="card purple">
+    <h2>⚛️ React Example (Interview Favorite)</h2>
+    <pre>
+const handleSearch = (e) => {
+  console.log("API Call:", e.target.value);
+};
+
+const debouncedSearch = useCallback(
+  debounce(handleSearch, 500),
+  []
+);
+
+<input type="text" onChange={debouncedSearch} />
+    </pre>
+  </div>
+
+  <!-- Comparison -->
+  <div class="card orange">
+    <h2>🆚 Debounce vs Throttle (1 Line)</h2>
+    <pre>
+Debounce        | Throttle
+Last action     | Fixed interval
+Search input   | Scroll / Resize
+    </pre>
+  </div>
+
+  <!-- One Line -->
+  <div class="card green">
+    <h2>🧠 One-line Definition (Interview)</h2>
+    <p>
+      <b>
+        Debouncing delays function execution until the user stops triggering the event for a specified time.
+      </b>
+    </p>
+  </div>
+
+  <!-- TypeScript -->
+  <div class="card blue">
+    <h2>🟦 TypeScript React Example</h2>
+    <pre>
+import React, { useCallback, useRef, type ChangeEvent } from "react";
+
+const App: React.FC = () => {
+  const timer = useRef<number | undefined>(undefined);
+
+  const handleSearch = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      if (timer.current) {
+        clearTimeout(timer.current);
+      }
+
+      const value = e.target.value;
+
+      timer.current = window.setTimeout(() => {
+        console.log("API Call for:", value);
+      }, 500);
+    },
+    []
+  );
+
+  return (
+    <input
+      type="text"
+      placeholder="Type here..."
+      onChange={handleSearch}
+    />
+  );
+};
+
+export default App;
+    </pre>
+  </div>
+
+  <!-- JS -->
+  <div class="card blue">
+    <h2>🟨 JavaScript React Example</h2>
+    <pre>
+import { useCallback, useRef } from "react";
+
+function App() {
+  const timer = useRef(null);
+
+  const handleSearch = useCallback((e) => {
+    clearTimeout(timer.current);
+    const value = e.target.value;
+
+    timer.current = setTimeout(() => {
+      console.log("API Call:", value);
+    }, 500);
+  }, []);
+
+  return <input onChange={handleSearch} />;
+}
+    </pre>
+  </div>
+
+  <!-- Interview Trap -->
+  <div class="card red">
+    <h2>⚠️ Classic React Interview Trap</h2>
+    <p>
+      ❌ Debounce = delay API only<br>
+      ❌ Debounce = stop re-render
+    </p>
+    <p>
+      ✅ Debounce controls <b>function execution</b><br>
+      ✅ Re-render still depends on state / props
+    </p>
+  </div>
+
+</div>
+
+<div class="container">
+
+  <h1>⏳ Debouncing with API Search (React + TypeScript)<br>
+    <small>Easy Explanation • Interview Ready</small>
+  </h1>
+
+  <!-- Intro -->
+  <div class="card blue">
+    <h2>🎯 What are we building?</h2>
+    <ul>
+      <li>API se users fetch karenge</li>
+      <li>Search box se filter karenge</li>
+      <li>Har keypress par filter ❌</li>
+      <li>Debounce ke saath filter ✅</li>
+    </ul>
+    <p><b>Goal:</b> Better performance + clean React logic</p>
+  </div>
+
+  <!-- Imports -->
+  <div class="card green">
+    <h2>1️⃣ Imports</h2>
+    <pre>
+import React, { useEffect, useState, type ChangeEvent } from "react";
+    </pre>
+    <ul>
+      <li><b>React</b> → JSX ke liye</li>
+      <li><b>useState</b> → data store karne ke liye</li>
+      <li><b>useEffect</b> → API call on mount</li>
+      <li><b>ChangeEvent</b> → TypeScript input type</li>
+    </ul>
+  </div>
+
+  <!-- User Type -->
+  <div class="card purple">
+    <h2>2️⃣ User Type (TypeScript)</h2>
+    <pre>
+interface User {
+  id: number;
+  firstName: string;
+  lastName: string;
+}
+    </pre>
+    <p>
+      👉 TypeScript ko batata hai ki
+      <b>User object kaisa hoga</b>
+    </p>
+  </div>
+
+  <!-- Debounce Function -->
+  <div class="card orange">
+    <h2>3️⃣ Debounce Function</h2>
+    <pre>
+function debounce&lt;T extends (...args: any[]) =&gt; void&gt;(
+  func: T,
+  delay: number
+) {
+  let timer: number;
+
+  return (...args: Parameters&lt;T&gt;) =&gt; {
+    clearTimeout(timer);
+    timer = setTimeout(() =&gt; func(...args), delay);
+  };
+}
+    </pre>
+    <ul>
+      <li>⏳ Function ko delay karta hai</li>
+      <li>⌨️ User typing band kare → tab chale</li>
+      <li>⚡ Performance improve hoti hai</li>
+    </ul>
+
+    <p>
+      📌 Example: <br>
+      Typing <b>John</b> → function sirf <b>300ms baad</b> run hota hai
+    </p>
+  </div>
+
+  <!-- State -->
+  <div class="card green">
+    <h2>4️⃣ Component State</h2>
+    <pre>
+const [users, setUsers] = useState&lt;User[]&gt;([]);
+const [search, setSearch] = useState("");
+const [filtered, setFiltered] = useState&lt;User[]&gt;([]);
+    </pre>
+    <ul>
+      <li><b>users</b> → API se aaye sab users</li>
+      <li><b>search</b> → input box ka text</li>
+      <li><b>filtered</b> → jo UI me dikhana hai</li>
+    </ul>
+  </div>
+
+  <!-- Fetch API -->
+  <div class="card blue">
+    <h2>5️⃣ Fetch Users from API</h2>
+    <pre>
+useEffect(() => {
+  fetch("https://dummyjson.com/users")
+    .then((res) => res.json())
+    .then((data) => {
+      setUsers(data.users);
+      setFiltered(data.users);
+    })
+    .catch(console.error);
+}, []);
+    </pre>
+
+    <ul>
+      <li>📡 API call sirf once (empty dependency)</li>
+      <li>📦 users me full data store</li>
+      <li>👀 filtered = initial display list</li>
+    </ul>
+  </div>
+
+  <!-- Debounced Search -->
+  <div class="card purple">
+    <h2>6️⃣ Debounced Search Logic</h2>
+    <pre>
+const handleSearch = debounce((query: string) => {
+  const result = users.filter((user) =>
+    `${user.firstName} ${user.lastName}`
+      .toLowerCase()
+      .includes(query.toLowerCase())
+  );
+  setFiltered(result);
+}, 300);
+    </pre>
+
+    <ul>
+      <li>🔍 firstName + lastName search</li>
+      <li>🔡 Case-insensitive</li>
+      <li>⏳ Runs after 300ms debounce</li>
+    </ul>
+  </div>
+
+  <!-- Input Handler -->
+  <div class="card orange">
+    <h2>7️⃣ Input Change Handler</h2>
+    <pre>
+const onChange = (e: ChangeEvent&lt;HTMLInputElement&gt;) => {
+  const value = e.target.value;
+  setSearch(value);
+  handleSearch(value);
+};
+    </pre>
+    <ul>
+      <li>⌨️ User types</li>
+      <li>📝 search state update</li>
+      <li>⏳ debounced search trigger</li>
+    </ul>
+  </div>
+
+  <!-- Render -->
+  <div class="card blue">
+    <h2>8️⃣ Render UI</h2>
+    <pre>
+<input
+  type="text"
+  placeholder="Search by first or last name"
+  value={search}
+  onChange={onChange}
+/>
+
+<ul>
+  {filtered.map((user) => (
+    <li key={user.id}>
+      {user.firstName} {user.lastName}
+    </li>
+  ))}
+</ul>
+    </pre>
+
+    <p>
+      ✔ Input controlled component <br>
+      ✔ List renders from <b>filtered</b> array <br>
+      ✔ <code>key</code> is mandatory in React lists
+    </p>
+  </div>
+
+  <!-- Flow -->
+  <div class="card green">
+    <h2>🔁 Flow (Easy to Remember)</h2>
+    <pre>
+User types
+  ↓
+Debounce (300ms)
+  ↓
+Filter users
+  ↓
+Update state
+  ↓
+UI re-render
+    </pre>
+  </div>
+
+  <!-- Interview -->
+  <div class="card red">
+    <h2>⚠️ Interview Traps</h2>
+    <ul>
+      <li>❌ Debounce = API delay only</li>
+      <li>❌ Debounce stops re-render</li>
+      <li>✅ Debounce controls function execution</li>
+      <li>✅ Re-render depends on state change</li>
+    </ul>
+  </div>
+
+  <!-- One Line -->
+  <div class="card green">
+    <h2>🎯 One-Line Interview Answer</h2>
+    <p>
+      <b>
+        Debouncing delays expensive operations like filtering or API calls
+        until the user stops typing, improving performance and user experience.
+      </b>
+    </p>
+  </div>
+
+</div>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="card blue">
+    <h1>🔁 JavaScript Event Loop</h1>
+  </div>
+
+  <!-- SINGLE THREAD -->
+  <div class="card green">
+    <h2>⚠️ JavaScript is Single-Threaded</h2>
+    <p>
+      JavaScript can do <strong>ONLY ONE thing at a time</strong>.<br>
+      Question: How does JS handle async tasks like setTimeout, API calls, Promises?<br>
+      <strong>Answer: Event Loop</strong>
+    </p>
+  </div>
+
+  <!-- MAIN PARTS -->
+  <div class="card purple">
+    <h2>🧩 Main Parts (Easy Words)</h2>
+    <ul>
+      <li><b>Call Stack</b> → Where JS executes code</li>
+      <li><b>Web APIs</b> → Browser handles async tasks (timer, fetch, DOM events)</li>
+      <li><b>Microtask Queue</b> → Promise.then, async/await</li>
+      <li><b>Callback Queue</b> → setTimeout, events</li>
+      <li><b>Event Loop</b> → Manager that moves tasks to Call Stack</li>
+    </ul>
+  </div>
+
+  <!-- SIMPLE RULE -->
+  <div class="card orange">
+    <h2>⭐ Simple Rule to Remember</h2>
+    <p>
+      1️⃣ Call Stack executes first<br>
+      2️⃣ Microtask Queue (Promises)<br>
+      3️⃣ Callback Queue (setTimeout)
+    </p>
+  </div>
+
+  <!-- EXAMPLE -->
+  <div class="card blue">
+    <h2>💡 Simple Example</h2>
+    <pre>
+console.log("Start");
+
+setTimeout(() => {
+  console.log("Timeout");
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log("Promise");
+});
+
+console.log("End");
+    </pre>
+  </div>
+
+  <!-- OUTPUT -->
+  <div class="card green">
+    <h2>✅ Output</h2>
+    <pre>
+Start
+End
+Promise
+Timeout
+    </pre>
+  </div>
+
+  <!-- STEP BY STEP -->
+  <div class="card purple">
+    <h2>🧠 Step-by-Step Explanation</h2>
+
+    <p><b>Step 1: Call Stack</b></p>
+    <pre>
+console.log("Start"); // printed
+console.log("End");   // printed
+➡ Output so far:
+Start
+End
+    </pre>
+
+    <p><b>Step 2: Async Handling</b></p>
+    <pre>
+setTimeout → Web API → Callback Queue
+Promise.then → Microtask Queue
+    </pre>
+
+    <p><b>Step 3: Event Loop</b></p>
+    <pre>
+Call Stack empty ✅
+Microtask Queue first → console.log("Promise")
+Then Callback Queue → console.log("Timeout")
+    </pre>
+  </div>
+
+  <!-- VISUAL FLOW -->
+  <div class="card orange">
+    <h2>🔄 Visual Flow</h2>
+    <pre>
+Call Stack
+   ↓
+Microtask Queue (Promise)
+   ↓
+Callback Queue (setTimeout)
+    </pre>
+  </div>
+
+  <!-- REAL LIFE -->
+  <div class="card blue">
+    <h2>🧑‍🍳 Real-Life Analogy</h2>
+    <ul>
+      <li>Chef → JS Engine</li>
+      <li>Orders → Call Stack</li>
+      <li>VIP Orders → Microtask Queue (Promise)</li>
+      <li>Timer Orders → Callback Queue (setTimeout)</li>
+    </ul>
+    <p>
+      Chef finishes current order → Serves VIP first → Then normal orders
+    </p>
+  </div>
+
+  <!-- INTERVIEW ANSWER -->
+  <div class="card green">
+    <h2>🎯 One-Line Interview Answer</h2>
+    <p>
+      Event Loop continuously checks if Call Stack is empty, then executes microtasks first and macrotasks later to handle asynchronous JavaScript.
+    </p>
+  </div>
+
+  <!-- IMPORTANT POINTS -->
+  <div class="card purple">
+    <h2>📌 Important Points (Exam + Interview)</h2>
+    <ul>
+      <li>✔ JS is single-threaded</li>
+      <li>✔ Promises run before setTimeout</li>
+      <li>✔ Event Loop does not execute code, it only moves tasks</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="card blue">
+    <h2>⚡ TypeScript: any vs unknown vs never (Super Easy)</h2>
+    <p>
+      Simplest explanation + examples to remember for interviews and exams.
+    </p>
+  </div>
+
+  <!-- ANY -->
+  <div class="card green">
+    <h2>1️⃣ any</h2>
+    <p>❌ No type safety → TypeScript stops checking types</p>
+    <pre>
+let a: any = 10;
+
+a.toUpperCase();  // ✅ Allowed (may crash)
+a();              // ✅ Allowed
+    </pre>
+    <ul>
+      <li>✔ Easy to use</li>
+      <li>❌ Unsafe</li>
+      <li>❌ Avoid in real projects</li>
+    </ul>
+  </div>
+
+  <!-- UNKNOWN -->
+  <div class="card purple">
+    <h2>2️⃣ unknown</h2>
+    <p>✅ Safe version of <code>any</code> → TypeScript forces type checking</p>
+    <pre>
+let u: unknown = "hello";
+
+// u.toUpperCase(); ❌ Error
+
+if (typeof u === "string") {
+  u.toUpperCase(); // ✅ Safe
+}
+    </pre>
+    <ul>
+      <li>✔ Safe</li>
+      <li>✔ Recommended</li>
+    </ul>
+  </div>
+
+  <!-- NEVER -->
+  <div class="card orange">
+    <h2>3️⃣ never</h2>
+    <p>🚫 Impossible value → represents something that never happens</p>
+    <pre>
+function throwError(): never {
+  throw new Error("Crash");
+}
+
+function infinite(): never {
+  while (true) {}
+}
+    </pre>
+    <ul>
+      <li>✔ Used for unreachable code</li>
+      <li>✔ Helps in exhaustive checks</li>
+    </ul>
+  </div>
+
+  <!-- TABLE -->
+ <!-- TABLE: any vs unknown vs never -->
+<div class="card purple">
+  <h2>📊 TypeScript Types Comparison</h2>
+   <div class="table-wrapper">
+    <table class="fancy-table">
+ 
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Meaning</th>
+        <th>Can use directly?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr >
+        <td><b>any</b></td>
+        <td>Anything allowed</td>
+        <td>✅ Yes</td>
+      </tr>
+      <tr>
+        <td><b>unknown</b></td>
+        <td>Anything, but check first</td>
+        <td>❌ No</td>
+      </tr>
+      <tr>
+        <td><b>never</b></td>
+        <td>Never happens</td>
+        <td>🚫 No value</td>
+      </tr>
+    </tbody>
+  </table>
+   </div>
+</div>
+
+
+  <!-- REAL EXAMPLE -->
+  <div class="card green">
+    <h2>🧩 Real Example (All Together)</h2>
+    <pre>
+function handle(value: unknown) {
+  if (typeof value === "string") {
+    console.log(value);      // value is string
+  } else {
+    const x: never = value; // unreachable case
+  }
+}
+    </pre>
+  </div>
+
+  <!-- INTERVIEW ANSWER -->
+  <div class="card purple">
+    <h2>🎯 One-Line Interview Answer</h2>
+    <p>
+      <b>
+        <code>any</code> disables type checking, <code>unknown</code> requires type checking, and <code>never</code> represents unreachable or impossible values.
+      </b>
+    </p>
+  </div>
+
+  <!-- MEMORY TRICK -->
+  <div class="card orange">
+    <h2>🧠 Memory Trick</h2>
+    <p>
+      <strong>any →</strong> Do anything<br>
+      <strong>unknown →</strong> Check first<br>
+      <strong>never →</strong> Never happens
+    </p>
+  </div>
+
+</div>
+
+
+      </div>
+
+    </section>
+
+    <!-- ===== REACT SECTION ===== -->
+    <section id="react">
+      <!-- Paste your 114 React containers here -->
+
+      <div class="unit-container">
+      
+<div class="container">
+
+  <h1>⚛️ React Rendering<br><small>(Easy + Interview Focused)</small></h1>
+
+  <!-- 1️⃣ Analysis -->
+  <div class="card green">
+    <h2>1️⃣ Analysis of Your Answer</h2>
+
+    <p><b>✅ What you got RIGHT</b></p>
+    <ul>
+      <li>✔ React JSX is not HTML</li>
+      <li>✔ Code is bundled before going to browser</li>
+      <li>✔ Babel converts JSX to JavaScript</li>
+      <li>✔ Browser understands only JavaScript</li>
+      <li>✔ React UI is rendered after JS execution</li>
+    </ul>
+
+    <p><b>⚠️ What needs correction</b></p>
+    <ul>
+      <li>
+        ❌ <b>Babel converts JSX to document.createElement</b><br>
+        👉 Babel converts JSX into <b>React.createElement()</b>, NOT document.createElement()
+      </li>
+      <li>
+        ❌ <b>Old JS format</b><br>
+        👉 Babel transpiles JSX + modern JS into browser-compatible JavaScript
+      </li>
+      <li>
+        ❌ <b>Missing Virtual DOM & ReactDOM</b><br>
+        👉 This is a BIG interview gap
+      </li>
+    </ul>
+  </div>
+
+  <!-- JSX Correction -->
+  <div class="card red">
+    <h2>❌ Common JSX Misunderstanding</h2>
+
+    <pre>
+&lt;Daya /&gt;
+
+⬇ Babel Output
+
+React.createElement(Daya, null)
+    </pre>
+
+    <p>⚠️ React does <b>NOT</b> touch the real DOM at this stage</p>
+  </div>
+
+  <!-- Flow -->
+  <div class="card blue">
+    <h2>2️⃣ Correct Flow: How React Renders</h2>
+
+    <div class="flow">
+      JSX → React Elements → Virtual DOM → Real DOM → Browser Paint
+    </div>
+  </div>
+
+  <!-- Step by Step -->
+  <div class="card purple">
+    <h2>🧩 Step-by-Step Rendering Process</h2>
+
+    <ol>
+      <li>
+        <b>Write React Component</b>
+        <pre>
+function Daya() {
+  return &lt;h1&gt;Hello Daya&lt;/h1&gt;;
+}
+        </pre>
+      </li>
+
+      <li>
+        <b>Bundler (Webpack / Vite)</b>
+        <p>Combines all JS into <code>bundle.js</code> (No DOM yet)</p>
+      </li>
+
+      <li>
+        <b>Babel Transpilation</b>
+        <pre>
+function Daya() {
+  return React.createElement("h1", null, "Hello Daya");
+}
+        </pre>
+        <p>⚠️ Still JavaScript objects, not HTML</p>
+      </li>
+
+      <li>
+        <b>Virtual DOM Creation</b>
+        <pre>
+{
+  type: "h1",
+  props: { children: "Hello Daya" }
+}
+        </pre>
+      </li>
+
+      <li>
+        <b>ReactDOM Renders to Real DOM</b>
+        <pre>
+ReactDOM.createRoot(root).render(&lt;Daya /&gt;);
+        </pre>
+        <p>✔ Uses <code>document.createElement</code> internally</p>
+      </li>
+
+      <li>
+        <b>Browser Paint</b>
+        <p>DOM updated → Pixels painted → 🎉 UI visible</p>
+      </li>
+    </ol>
+  </div>
+
+  <!-- Interview Answer -->
+  <div class="card green">
+    <h2>3️⃣ Interview-Ready Explanation 🎤</h2>
+    <p>
+      React components do not render HTML directly.
+      First, the code is bundled using tools like Webpack or Vite.
+      Babel converts JSX into React.createElement calls.
+      These create a Virtual DOM, which ReactDOM compares and updates efficiently.
+      Finally, the browser paints the updated UI.
+    </p>
+  </div>
+
+  <!-- One Line -->
+  <div class="card blue">
+    <h2>🧠 One-Line Summary (Powerful)</h2>
+    <div class="flow">
+      JSX → React Elements → Virtual DOM → Diffing → Real DOM → Browser Paint
+    </div>
+  </div>
+
+  <!-- Re-render -->
+  <div class="card orange">
+    <h2>🔁 How Re-Rendering Works</h2>
+
+    <p><b>Re-render</b> = React runs your component function again</p>
+
+    <p><b>🔔 When does re-render happen?</b></p>
+    <ul>
+      <li>State change (useState / setState)</li>
+      <li>Props change</li>
+      <li>Context value change</li>
+    </ul>
+
+    <p><b>🔄 What happens?</b></p>
+    <ul>
+      <li>Component function re-runs</li>
+      <li>New Virtual DOM created</li>
+      <li>Old vs new Virtual DOM diffing</li>
+      <li>Only changed DOM nodes update</li>
+    </ul>
+
+    <p>⚠️ <b>Important:</b> Re-render ≠ DOM update</p>
+  </div>
+
+  <!-- Performance -->
+  <div class="card purple">
+    <h2>🚀 Performance Tips</h2>
+    <ul>
+      <li><b>React.memo</b> → Prevents unnecessary re-renders</li>
+      <li><b>useMemo</b> → Avoids expensive recalculation</li>
+      <li><b>useCallback</b> → Avoids function recreation</li>
+    </ul>
+  </div>
+
+  <!-- Final Interview Line -->
+  <div class="card green">
+    <h2>🎯 One-Line Interview Answer</h2>
+    <p>
+      <b>
+        React re-renders by re-executing the component, creating a new Virtual DOM,
+        diffing it with the old one, and updating only the changed DOM nodes.
+      </b>
+    </p>
+
+    <div>
+      <span class="tag">Interview</span>
+      <span class="tag">React</span>
+      <span class="tag">Virtual DOM</span>
+    </div>
+  </div>
+
+</div>
+
+
+      </div>
+
+    </section>
+
+    <!-- ===== HTML & CSS SECTION ===== -->
+    <section id="htmlcss">
+      <!-- Paste HTML & CSS content here -->
+
+      <div class="unit-container">
+       
+<div class="container">
+
+  <h1>🏷️ Semantic Tags in HTML<br><small>(Easy Explanation)</small></h1>
+
+  <!-- What are Semantic Tags -->
+  <div class="card blue">
+    <h2>🔵 What are Semantic Tags?</h2>
+    <p>
+      👉 Semantic tags wo HTML tags hote hain jo <b>content ka meaning clearly batate hain</b><br>
+      👉 Ye sirf design nahi, balki <b>content ka purpose</b> batate hain
+    </p>
+    <p>🧠 Browser aur developer dono samajh pate hain</p>
+  </div>
+
+  <!-- Common Semantic Tags -->
+  <div class="card green">
+    <h2>🟢 Common Semantic Tags</h2>
+    <ul>
+      <li><b>&lt;header&gt;</b> – Top section (logo, title, menu)</li>
+      <li><b>&lt;nav&gt;</b> – Navigation links</li>
+      <li><b>&lt;main&gt;</b> – Main content of page</li>
+      <li><b>&lt;section&gt;</b> – Group of related content</li>
+      <li><b>&lt;article&gt;</b> – Independent content (blog, news)</li>
+      <li><b>&lt;aside&gt;</b> – Side content (ads, sidebar)</li>
+      <li><b>&lt;footer&gt;</b> – Bottom section (copyright, links)</li>
+    </ul>
+  </div>
+
+  <!-- Example -->
+  <div class="card orange">
+    <h2>🧪 Simple Example</h2>
+    <pre>
+&lt;header&gt;
+  &lt;h1&gt;My Website&lt;/h1&gt;
+&lt;/header&gt;
+
+&lt;nav&gt;
+  &lt;a href="#"&gt;Home&lt;/a&gt;
+&lt;/nav&gt;
+
+&lt;main&gt;
+  &lt;article&gt;
+    &lt;h2&gt;Blog Title&lt;/h2&gt;
+    &lt;p&gt;Blog content&lt;/p&gt;
+  &lt;/article&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;
+  © 2025
+&lt;/footer&gt;
+    </pre>
+  </div>
+
+  <!-- Why use -->
+  <div class="card purple">
+    <h2>🟡 Why Use Semantic Tags?</h2>
+    <ul>
+      <li>✔ Easy to understand code</li>
+      <li>✔ Better SEO</li>
+      <li>✔ Better accessibility (screen readers)</li>
+    </ul>
+  </div>
+
+  <!-- Non semantic vs semantic -->
+  <div class="card red">
+    <h2>🔴 Non-Semantic vs Semantic</h2>
+    <p>❌ <b>&lt;div&gt;, &lt;span&gt;</b> → No meaning</p>
+    <p>✅ <b>&lt;header&gt;, &lt;article&gt;</b> → Clear meaning</p>
+  </div>
+
+  <!-- One Line -->
+  <div class="card blue">
+    <h2>🎯 One-Line Interview Answer</h2>
+    <p>
+      👉 <b>Semantic tags describe the purpose of content in HTML clearly.</b>
+    </p>
+    <div>
+      <span class="tag">HTML</span>
+      <span class="tag">SEO</span>
+      <span class="tag">Accessibility</span>
+      <span class="tag">Interview</span>
+    </div>
+  </div>
+
+</div>
+
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ===== SCRIPT ===== -->
+  <script>
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll("section");
+      const tabs = document.querySelectorAll(".tab");
+
+      sections.forEach(section => {
+        section.classList.remove("active");
+      });
+
+      tabs.forEach(tab => {
+        tab.classList.remove("active");
+      });
+
+      document.getElementById(sectionId).classList.add("active");
+      event.target.classList.add("active");
+    }
+  </script>
+
+</body>
+</html>

@@ -125,13 +125,6 @@
       color: #1f2937;
     }
 
-    pre {
-      background: #f3f4f6;
-      padding: 15px;
-      border-radius: 10px;
-      overflow-x: auto;
-    }
-
     .flow {
       font-weight: bold;
       text-align: center;
@@ -205,6 +198,20 @@
     font-size: 14px;
   }
 }
+
+pre {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: 16px;
+  border-radius: 10px;
+  overflow-x: auto;
+  font-size: 14px;
+}
+
+code {
+  font-family: Consolas, Monaco, monospace;
+}
+
   </style>
 </head>
 
@@ -213,7 +220,10 @@
   <!-- ===== FIXED HEADER ===== -->
   <header>
     <button class="tab active" onclick="showSection('javascript')">JavaScript</button>
+    <button class="tab" onclick="showSection('javascript_coding')">JavaScript Coding</button>
     <button class="tab" onclick="showSection('react')">React</button>
+        <button class="tab" onclick="showSection('react_coding')">React Coding</button>
+
     <button class="tab" onclick="showSection('htmlcss')">HTML & CSS</button>
   </header>
 
@@ -1163,6 +1173,113 @@ function handle(value: unknown) {
 
     </section>
 
+     <section id="javascript_coding" class="active">
+      <!-- Paste your 31 JavaScript containers here -->
+
+      <div class="unit-container">
+      
+    <div class="container">
+
+      <h1>
+        📢 Group Anagrams in JavaScript <br>
+        <small>(Easy & Interview-Ready)</small>
+      </h1>
+
+      <!-- Step 1 -->
+      <div class="card blue">
+        <h3>🟦 </h3>
+        <p>Create a function and an empty object to store anagram groups.</p>
+        <pre><code>
+function groupAnagrams(words) {
+  const map = {};
+
+  for (let word of words) {
+    // Step 1: sort letters of word
+    const sorted = word.split('').sort().join('');
+
+    // Step 2: create group if not exists
+    if (!map[sorted]) {
+      map[sorted] = [];
+    }
+
+    // Step 3: push word into group
+    map[sorted].push(word);
+  }
+
+  // Step 4: return all groups
+  return Object.values(map);
+}
+
+// Example usage
+const input = ["eat", "tea", "tan", "ate", "nat", "bat"];
+console.log(groupAnagrams(input));
+
+        </code></pre>
+      </div>
+   
+    </div>
+
+   
+  <div class="container">
+
+    <h2>📌 Second Largest Number in Array</h2>
+    <p><strong>Here are two very simple ways 👍</strong><br>
+      (Plain JavaScript, easy to remember)</p>
+
+    <!-- Method 1 -->
+    <div class="card blue">
+      <h3>✅ Method 1: Using loop <small>(BEST for interview)</small></h3>
+
+      <pre><code>
+const arr = [10, 5, 20, 8, 15];
+
+let largest = -Infinity;
+let secondLargest = -Infinity;
+
+for (let num of arr) {
+  if (num &gt; largest) {
+    secondLargest = largest;
+    largest = num;
+  } else if (num &gt; secondLargest &amp;&amp; num !== largest) {
+    secondLargest = num;
+  }
+}
+
+console.log(secondLargest); // 15
+      </code></pre>
+    </div>
+
+    <!-- Method 2 -->
+    <div class="card green">
+      <h3>✅ Method 2: Using sort <small>(VERY simple)</small></h3>
+
+      <pre><code>
+const arr = [10, 5, 20, 8, 15];
+
+const secondLargest = arr
+  .sort((a, b) =&gt; b - a)[1];
+
+console.log(secondLargest); // 15
+      </code></pre>
+    </div>
+
+    <!-- Interview Tip -->
+    <div class="card blue">
+      <h3>🧠 One-line Interview Answer</h3>
+      <p>
+        “Track largest and second largest while looping through the array.”
+      </p>
+    </div>
+
+  </div>
+
+
+  </div>
+
+   
+
+    </section>
+
     <!-- ===== REACT SECTION ===== -->
     <section id="react">
       <!-- Paste your 114 React containers here -->
@@ -1354,6 +1471,454 @@ ReactDOM.createRoot(root).render(&lt;Daya /&gt;);
 
 </div>
 
+<div class="container">
+
+  <!-- HEADER -->
+  
+    <h1>Higher Order Component (HOC)</h1>
+   
+ 
+
+  <!-- SIMPLE MEANING -->
+  <div class="card green">
+    <h3>Simple Meaning</h3>
+    <p>
+      Higher Order Component (HOC) ek function hota hai jo ek component
+      ko input leta hai aur ek naya enhanced component return karta hai.
+    </p>
+    <p>
+      
+      Component → function ke andar → extra logic → new component
+    </p>
+  </div>
+
+  <!-- REAL LIFE EXAMPLE -->
+  <div class="card blue">
+    <h3>Real-life Example</h3>
+    <p>
+      Socho tumhare paas normal coffee hai ☕<br>
+      Tum usme milk + sugar add kar dete ho<br><br>
+
+      Coffee = Original Component<br>
+      Milk / Sugar = Extra Logic<br>
+      Coffee Machine = HOC
+    </p>
+  </div>
+
+  <!-- WHY HOC -->
+  <div class="card green">
+    <h3>Why Higher Order Component?</h3>
+    <ul>
+      <li>Same logic bar-bar likhne se bachata hai</li>
+      <li>Code reusable banata hai</li>
+      <li>Interview-friendly approach</li>
+    </ul>
+  </div>
+
+  <!-- EXAMPLE INTRO -->
+  <div class="card blue">
+    <h3>Simple Example</h3>
+    <p>
+      Goal: Ek HOC banana jo kisi bhi component me counter logic add kare.
+    </p>
+  </div>
+
+  <!-- HOC CODE -->
+  <div class="card green">
+    <h4>1️⃣ Higher Order Component</h4>
+    <pre><code>
+function withCounter(WrappedComponent) {
+  return function EnhancedComponent() {
+    const [count, setCount] = React.useState(0);
+
+    const increment = () => setCount(count + 1);
+
+    return (
+      &lt;WrappedComponent
+        count={count}
+        increment={increment}
+      /&gt;
+    );
+  };
+}
+    </code></pre>
+  </div>
+
+  <!-- NORMAL COMPONENT -->
+  <div class="card green">
+    <h4>2️⃣ Normal Component</h4>
+    <pre><code>
+function ClickCounter({ count, increment }) {
+  return (
+    &lt;button onClick={increment}&gt;
+      Clicked {count} times
+    &lt;/button&gt;
+  );
+}
+    </code></pre>
+  </div>
+
+  <!-- WRAP WITH HOC -->
+  <div class="card green">
+    <h4>3️⃣ Wrap Component with HOC</h4>
+    <pre><code>
+export default withCounter(ClickCounter);
+    </code></pre>
+  </div>
+
+  <!-- FLOW -->
+  <div class="card blue">
+    <h3>Flow</h3>
+    <pre><code>
+ClickCounter
+   ↓
+withCounter(ClickCounter)
+   ↓
+Enhanced Component (with extra logic)
+    </code></pre>
+  </div>
+
+  <!-- INTERVIEW LINE -->
+  <div class="card green">
+    <h3>Interview One-Liner</h3>
+    <p>
+      A Higher Order Component is a function that takes a component
+      and returns a new component with additional functionality.
+    </p>
+  </div>
+
+  <!-- NOTES -->
+  <div class="card blue">
+    <h3>Important Notes</h3>
+    <ul>
+      <li>HOC hooks ka replacement nahi hai</li>
+      <li>Mostly older React codebase me use hota hai</li>
+      <li>Today logic sharing ke liye Custom Hooks prefer kiye jaate hain</li>
+    </ul>
+  </div>
+
+</div>
+
+
+      </div>
+
+    </section>
+
+      <!-- ===== REACT CODING SECTION ===== -->
+    <section id="react_coding">
+      <!-- Paste your 114 React containers here -->
+
+      <div class="unit-container">
+          <div class="container">
+ <h1>
+        📢 React User List (API + Search)
+      </h1>
+
+      <!-- Step 1 -->
+     <div class="card blue">
+  <pre><code>
+import React, { useEffect, useState } from "react";
+
+// 1️⃣ Define TypeScript type
+type User = {
+  id: number;
+  name: string;
+  email: string;
+};
+
+const UserList: React.FC = () => {
+  // 2️⃣ State for API data
+  const [users, setUsers] = useState&lt;User[]&gt;([]);
+  const [search, setSearch] = useState("");
+
+  // 3️⃣ API call
+  useEffect(() =&gt; {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then(res =&gt; res.json())
+      .then(data =&gt; setUsers(data));
+  }, []);
+
+  // 4️⃣ Filter logic
+  const filteredUsers = users.filter(user =&gt;
+    user.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  return (
+    &lt;div&gt;
+      &lt;h3&gt;User List&lt;/h3&gt;
+
+      {/* 5️⃣ Input box */}
+      &lt;input
+        type="text"
+        placeholder="Search user..."
+        value={search}
+        onChange={e =&gt; setSearch(e.target.value)}
+      /&gt;
+
+      {/* 6️⃣ Display list */}
+      &lt;ul&gt;
+        {filteredUsers.map(user =&gt; (
+          &lt;li key={user.id}&gt;
+            {user.name} - {user.email}
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default UserList;
+  </code></pre>
+</div>
+</div>
+ <div class="container">
+ <h1>
+        📢 React User List (Search + Pagination) 
+      </h1>
+
+     <div class="card blue">
+  <h3>📄 React User List (Search + Pagination)</h3>
+
+  <pre><code class="language-tsx">
+import React, { useEffect, useState } from "react";
+
+type User = {
+  id: number;
+  name: string;
+  email: string;
+};
+
+const ITEMS_PER_PAGE = 3;
+
+const UserList: React.FC = () => {
+  const [users, setUsers] = useState&lt;User[]&gt;([]);
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+
+  useEffect(() =&gt; {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then(res =&gt; res.json())
+      .then(data =&gt; setUsers(data));
+  }, []);
+
+  // Search filter
+  const filteredUsers = users.filter(user =&gt;
+    user.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  // Pagination logic
+  const startIndex = (page - 1) * ITEMS_PER_PAGE;
+  const paginatedUsers = filteredUsers.slice(
+    startIndex,
+    startIndex + ITEMS_PER_PAGE
+  );
+
+  const totalPages = Math.ceil(filteredUsers.length / ITEMS_PER_PAGE);
+
+  return (
+    &lt;div&gt;
+      &lt;h3&gt;User List&lt;/h3&gt;
+
+      &lt;input
+        type="text"
+        placeholder="Search user..."
+        value={search}
+        onChange={e =&gt; {
+          setSearch(e.target.value);
+          setPage(1);
+        }}
+      /&gt;
+
+      &lt;ul&gt;
+        {paginatedUsers.map(user =&gt; (
+          &lt;li key={user.id}&gt;
+            {user.name} - {user.email}
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+
+      &lt;button
+        disabled={page === 1}
+        onClick={() =&gt; setPage(page - 1)}
+      &gt;
+        Previous
+      &lt;/button&gt;
+
+      &lt;span style={{ margin: "0 10px" }}&gt;
+        Page {page} of {totalPages}
+      &lt;/span&gt;
+
+      &lt;button
+        disabled={page === totalPages}
+        onClick={() =&gt; setPage(page + 1)}
+      &gt;
+        Next
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default UserList;
+  </code></pre>
+</div>
+
+</div>
+<div class="container">
+ <h1>
+        📢 React TO DO 
+      </h1>
+
+     <div class="card blue">
+  <h3>📄 React TO DO</h3>
+
+  <pre>
+<code>
+import React, { useState } from &quot;react&quot;;
+
+type Item = {
+  id: number;
+  text: string;
+};
+
+const TodoList: React.FC = () =&gt; {
+  const [input, setInput] = useState(&quot;&quot;);
+  const [items, setItems] = useState&lt;Item[]&gt;([]);
+  const [editId, setEditId] = useState&lt;number | null&gt;(null);
+
+  const handleAddOrUpdate = () =&gt; {
+    if (!input.trim()) return;
+
+    // Update existing item
+    if (editId !== null) {
+      setItems(
+        items.map(item =&gt;
+          item.id === editId ? { ...item, text: input } : item
+        )
+      );
+      setEditId(null);
+    } else {
+      // Add new item
+      setItems([...items, { id: Date.now(), text: input }]);
+    }
+
+    setInput(&quot;&quot;);
+  };
+
+  const handleEdit = (item: Item) =&gt; {
+    setInput(item.text);
+    setEditId(item.id);
+  };
+
+  const handleDelete = (id: number) =&gt; {
+    setItems(items.filter(item =&gt; item.id !== id));
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;h3&gt;Simple Add / Edit / Delete&lt;/h3&gt;
+
+      &lt;input
+        type=&quot;text&quot;
+        placeholder=&quot;Enter value&quot;
+        value={input}
+        onChange={e =&gt; setInput(e.target.value)}
+      /&gt;
+
+      &lt;button onClick={handleAddOrUpdate}&gt;
+        {editId ? &quot;Update&quot; : &quot;Add&quot;}
+      &lt;/button&gt;
+
+      &lt;ul&gt;
+        {items.map(item =&gt; (
+          &lt;li key={item.id}&gt;
+            {item.text}
+
+            &lt;button onClick={() =&gt; handleEdit(item)}&gt;Edit&lt;/button&gt;
+            &lt;button onClick={() =&gt; handleDelete(item.id)}&gt;Delete&lt;/button&gt;
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default TodoList;
+</code>
+</pre>
+
+</div>
+
+</div>
+
+<div class="container">
+ <h1>
+        📢 Multi API Call
+      </h1>
+
+     <div class="card blue">
+  <h3>📄 Multi API Call</h3>
+<pre>
+<code>
+import React, { useEffect, useState } from &quot;react&quot;;
+import axios from &quot;axios&quot;;
+
+const MultiApiCall: React.FC = () =&gt; {
+  const [users, setUsers] = useState&lt;any[]&gt;([]);
+  const [posts, setPosts] = useState&lt;any[]&gt;([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() =&gt; {
+    const headers = {
+      Authorization: &quot;Bearer dummy-token&quot;,
+      &quot;Content-Type&quot;: &quot;application/json&quot;,
+    };
+
+    // Call all APIs together
+    Promise.all([
+      axios.get(&quot;https://jsonplaceholder.typicode.com/users&quot;, { headers }),
+      axios.get(&quot;https://jsonplaceholder.typicode.com/posts&quot;, { headers }),
+    ])
+      .then(([usersRes, postsRes]) =&gt; {
+        setUsers(usersRes.data);
+        setPosts(postsRes.data);
+      })
+      .catch(error =&gt; {
+        console.error(&quot;API Error:&quot;, error);
+      })
+      .finally(() =&gt; {
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return &lt;p&gt;Loading...&lt;/p&gt;;
+
+  return (
+    &lt;div&gt;
+      &lt;h3&gt;Users&lt;/h3&gt;
+      &lt;ul&gt;
+        {users.slice(0, 3).map(user =&gt; (
+          &lt;li key={user.id}&gt;{user.name}&lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+
+      &lt;h3&gt;Posts&lt;/h3&gt;
+      &lt;ul&gt;
+        {posts.slice(0, 3).map(post =&gt; (
+          &lt;li key={post.id}&gt;{post.title}&lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default MultiApiCall;
+</code>
+</pre>
+
+
+</div>
+
+</div>
 
       </div>
 

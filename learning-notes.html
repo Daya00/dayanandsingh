@@ -199,17 +199,43 @@
   }
 }
 
+/* ===== VS CODE DARK THEME FOR CODE BLOCKS ===== */
+
 pre {
-  background: #1e1e1e;
-  color: #d4d4d4;
-  padding: 16px;
-  border-radius: 10px;
+  background: #1e1e1e;            /* VS Code editor background */
+  color: #d4d4d4;                 /* Default text color */
+  padding: 18px;
+  border-radius: 12px;
   overflow-x: auto;
   font-size: 14px;
+  line-height: 1.6;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  margin: 16px 0;
 }
 
+/* Code font */
 code {
-  font-family: Consolas, Monaco, monospace;
+  font-family: "Fira Code", Consolas, Monaco, "Courier New", monospace;
+  white-space: pre;
+}
+
+/* Optional: scrollbar styling (Chrome / Edge) */
+pre::-webkit-scrollbar {
+  height: 8px;
+}
+
+pre::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+pre::-webkit-scrollbar-thumb {
+  background: #424242;
+  border-radius: 4px;
+}
+
+/* Optional: selection color (like VS Code) */
+pre ::selection {
+  background: #264f78;
 }
 
   </style>
@@ -1221,10 +1247,10 @@ console.log(groupAnagrams(input));
 
    
   <div class="container">
-
-    <h2>📌 Second Largest Number in Array</h2>
-    <p><strong>Here are two very simple ways 👍</strong><br>
-      (Plain JavaScript, easy to remember)</p>
+ <h1>
+        Second Largest Number in Array
+      </h1>
+  
 
     <!-- Method 1 -->
     <div class="card blue">
@@ -1273,10 +1299,75 @@ console.log(secondLargest); // 15
 
   </div>
 
+   <div class="container">
+
+    <h1>📌 Rotate array</h1>
+
+    <!-- Method 1 -->
+    <div class="card blue">
+      <h3>✅ Method 1: Using loop <small>(BEST for interview)</small></h3>
+
+      <pre><code>
+function rotate(nums, k) {
+  const n = nums.length;
+  k = k % n; // handle large k
+
+  // helper function to reverse array part
+  function reverse(start, end) {
+    while (start < end) {
+      [nums[start], nums[end]] = [nums[end], nums[start]];
+      start++;
+      end--;
+    }
+  }
+
+  // Step 1: reverse entire array
+  reverse(0, n - 1);
+
+  // Step 2: reverse first k elements
+  reverse(0, k - 1);
+
+  // Step 3: reverse remaining elements
+  reverse(k, n - 1);
+}
+
+      </code></pre>
+    </div>
+
+    <!-- Method 2 -->
+    <div class="card green">
+      <h3>✅ Method 2: brut force <small>(VERY simple)</small></h3>
+
+      <pre><code>
+function rotate(nums, k) {
+  const n = nums.length;
+  k = k % n; // handle large k
+
+  for (let i = 0; i < k; i++) {
+    // remove last element
+    const last = nums.pop();
+
+    // add it to the front
+    nums.unshift(last);
+  }
+}
+
+const nums = [1,2,3,4,5,6,7];
+const k = 3;
+      </code></pre>
+    </div>
+
+    <!-- Interview Tip -->
+    <div class="card blue">
+      <h3>🧠 One-line Interview Answer</h3>
+      <p>
+        “Track largest and second largest while looping through the array.”
+      </p>
+    </div>
 
   </div>
 
-   
+  </div>
 
     </section>
 
@@ -1671,6 +1762,35 @@ export default UserList;
   </code></pre>
 </div>
 </div>
+<div class="container">
+ <h1>
+        📢 React User List (DATA + Search)
+      </h1>
+
+      <!-- Step 1 -->
+     <div class="card blue">
+ <pre>
+  <code>
+function ListFilter() {
+  const [text, setText] = React.useState("");
+  const data = ["React", "Angular", "Vue"];
+
+  return (
+    <>
+      &lt;input onChange={(e) =&gt; setText(e.target.value)} /&gt;
+      &lt;ul&gt;
+        {data
+          .filter(item =&gt; item.toLowerCase().includes(text.toLowerCase()))
+          .map(item =&gt; &lt;li key={item}&gt;{item}&lt;/li&gt;)}
+      &lt;/ul&gt;
+    &lt;/&gt;
+  );
+}
+  </code>
+</pre>
+</pre>
+</div>
+</div>
  <div class="container">
  <h1>
         📢 React User List (Search + Pagination) 
@@ -1679,7 +1799,8 @@ export default UserList;
      <div class="card blue">
   <h3>📄 React User List (Search + Pagination)</h3>
 
-  <pre><code class="language-tsx">
+  <pre>
+    <code>
 import React, { useEffect, useState } from "react";
 
 type User = {
@@ -1915,6 +2036,61 @@ export default MultiApiCall;
 </code>
 </pre>
 
+
+</div>
+
+</div>
+
+<div class="container">
+ <h1>
+        1️⃣ Implement a Debounce function in JavaScript
+      </h1>
+
+     <div class="card blue">
+  <h3>👉 Tests closures, timers, performance optimization
+</h3>
+<pre>
+<code>
+
+
+function debounce(fn, delay) {
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
+
+// usage
+const search = debounce((text) => console.log(text), 500);
+search("React");
+
+</code>
+</pre>
+
+
+</div>
+
+</div>
+
+<div class="container">
+ <h1>
+       3️⃣ Explain & Code useMemo vs useCallback
+      </h1>
+     <div class="card blue">
+<pre>
+<code>
+
+const expensiveCalc = React.useMemo(() => {
+  return items.reduce((a, b) => a + b, 0);
+}, [items]);
+
+const handleClick = React.useCallback(() => {
+  console.log("Clicked");
+}, []);
+
+</code>
+</pre>
 
 </div>
 

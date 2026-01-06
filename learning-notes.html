@@ -2096,7 +2096,376 @@ const handleClick = React.useCallback(() => {
 
 </div>
 
-      </div>
+<div class="container">
+  <h1>
+    Home > React > <span>Child to Sibling Data Flow</span>
+  </h1>
+
+  <div class="card">
+
+    <h2>📌 Flow Explanation</h2>
+    <ul>
+      <li>Child Component sends data to Parent</li>
+      <li>Parent stores data in state</li>
+      <li>Sibling Component receives data via props</li>
+    </ul>
+
+    <hr />
+
+    <h2>🧩 Parent Component</h2>
+    <pre><code>
+function Parent() {
+  const [message, setMessage] = React.useState("");
+
+  return (
+    &lt;div&gt;
+      &lt;Child sendData={setMessage} /&gt;
+      &lt;Sibling receivedData={message} /&gt;
+    &lt;/div&gt;
+  );
+}
+    </code></pre>
+
+    <p><strong>What happens here?</strong></p>
+    <ul>
+      <li><code>setMessage</code> is sent to Child</li>
+      <li>State value <code>message</code> is sent to Sibling</li>
+    </ul>
+
+    <hr />
+
+    <h2>👶 Child Component (Sending Data)</h2>
+    <pre><code>
+function Child({ sendData }) {
+  return (
+    &lt;div&gt;
+      &lt;button onClick={() =&gt; sendData("Hello from Child!")}&gt;
+        Send Data to Parent
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+    </code></pre>
+
+    <p>
+      ✅ Child calls <code>sendData()</code>  
+      <br />
+      👉 Data goes to Parent
+    </p>
+
+    <hr />
+
+    <h2>👧 Sibling Component (Receiving Data)</h2>
+    <pre><code>
+function Sibling({ receivedData }) {
+  return (
+    &lt;div&gt;
+      &lt;h3&gt;Message from Parent:&lt;/h3&gt;
+      &lt;p&gt;{receivedData}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+    </code></pre>
+
+    <p>
+      ✅ Sibling receives data as props  
+      <br />
+      👉 No direct Child → Sibling communication
+    </p>
+
+    <hr />
+
+    <h2>🧠 Easy Diagram</h2>
+    <pre><code>
+Child
+  ↓ (callback)
+Parent (state)
+  ↓ (props)
+Sibling
+    </code></pre>
+
+    <h2>✅ Key Rule to Remember</h2>
+    <ul>
+      <li>❌ Child cannot directly talk to sibling</li>
+      <li>✅ Parent is the middleman</li>
+      <li>✅ State always lives in Parent</li>
+    </ul>
+
+  </div>
+</div>
+<div class="container">
+  <h1>
+    Home > React > <span>Error Boundaries</span>
+  </h1>
+
+  <div class="card">
+
+    <h2>📌 What is Error Boundary?</h2>
+    <p>
+      An <strong>Error Boundary</strong> is a special React component
+      that <strong>catches JavaScript errors</strong> in child components
+      and shows a <strong>fallback UI</strong> instead of crashing the whole app.
+    </p>
+
+    <hr />
+
+    <h2>🧠 Easiest Way #1 – Real Life Example</h2>
+    <p>
+      🚗 Think of a car:
+      <br />
+      If one tyre gets punctured,
+      the <strong>entire car doesn’t explode</strong>.
+    </p>
+
+    <p>
+      👉 Error Boundary works the same way:
+      <br />
+      If one component fails,
+      <strong>only that part stops</strong>,
+      not the whole app.
+    </p>
+
+    <hr />
+
+    <h2>🧠 Easiest Way #2 – React App Example</h2>
+    <p>
+      ❌ Without Error Boundary:
+      <br />
+      One component error → Full app crash 😵
+    </p>
+
+    <p>
+      ✅ With Error Boundary:
+      <br />
+      Error component fails → Friendly message shown 🙂
+    </p>
+
+    <hr />
+
+    <h2>🧱 Error Boundary Component</h2>
+    <pre><code>
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return &lt;h3&gt;⚠️ Something went wrong.&lt;/h3&gt;;
+    }
+
+    return this.props.children;
+  }
+}
+    </code></pre>
+
+    <p>
+      ✅ Catches errors in child components  
+      <br />
+      ✅ Shows fallback UI
+    </p>
+
+    <hr />
+
+    <h2>💥 Component That Throws Error</h2>
+    <pre><code>
+function BuggyComponent() {
+  throw new Error("App crashed!");
+}
+    </code></pre>
+
+    <hr />
+
+    <h2>🧩 Using Error Boundary</h2>
+    <pre><code>
+function App() {
+  return (
+    &lt;ErrorBoundary&gt;
+      &lt;BuggyComponent /&gt;
+    &lt;/ErrorBoundary&gt;
+  );
+}
+    </code></pre>
+
+    <p>
+      👉 Only <code>BuggyComponent</code> fails  
+      <br />
+      👉 App stays alive
+    </p>
+
+    <hr />
+
+    <h2>🧠 Easy Flow Diagram</h2>
+    <pre><code>
+Child Component
+     ↓ error
+Error Boundary
+     ↓
+Fallback UI
+    </code></pre>
+
+    <hr />
+
+    <h2>⚠️ Important Rules (Very Easy)</h2>
+    <ul>
+      <li>Works only with <strong>class components</strong></li>
+      <li>Catches errors during <strong>render</strong></li>
+      <li>Does NOT catch:
+        <ul>
+          <li>Event handlers</li>
+          <li>Async code (setTimeout, fetch)</li>
+          <li>Errors inside Error Boundary itself</li>
+        </ul>
+      </li>
+    </ul>
+
+    <hr />
+
+    <h2>✅ When to Use Error Boundary?</h2>
+    <ul>
+      <li>Around big UI sections</li>
+      <li>Around risky components</li>
+      <li>Production apps</li>
+    </ul>
+
+    <hr />
+
+    <h2>🎯 One-Line Interview Answer</h2>
+    <p>
+      Error Boundary is a React component that
+      catches JavaScript errors in child components
+      and prevents the whole app from crashing.
+    </p>
+
+  </div>
+</div>
+<div class="container">
+  <h1>
+    Home > React > <span>Error Boundary (Functional Component)</span>
+  </h1>
+
+  <div class="card">
+
+    <h2>📌 Important Truth (Very Easy)</h2>
+    <p>
+      ❌ React <strong>does not provide Error Boundary for functional components</strong> directly.
+    </p>
+    <p>
+      ✅ But we can use <strong>react-error-boundary</strong> to achieve the same.
+    </p>
+
+    <hr />
+
+    <h2>🧠 Easiest Way #1 – Simple Words</h2>
+    <p>
+      Functional components cannot catch errors by themselves.
+      <br />
+      So we use a <strong>ready-made ErrorBoundary component</strong>.
+    </p>
+
+    <p>
+      👉 Same concept, less code, fully supported.
+    </p>
+
+    <hr />
+
+    <h2>🧠 Easiest Way #2 – Comparison</h2>
+    <ul>
+      <li>Class Component → Error Boundary built-in</li>
+      <li>Functional Component → Use library</li>
+    </ul>
+
+    <hr />
+
+    <h2>📦 Install Library</h2>
+    <pre><code>
+npm install react-error-boundary
+    </code></pre>
+
+    <hr />
+
+    <h2>🧩 Fallback UI (Functional Component)</h2>
+    <pre><code>
+function ErrorFallback({ error }) {
+  return (
+    &lt;div&gt;
+      &lt;h3&gt;⚠️ Something went wrong&lt;/h3&gt;
+      &lt;p&gt;{error.message}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+    </code></pre>
+
+    <hr />
+
+    <h2>💥 Buggy Component</h2>
+    <pre><code>
+function BuggyComponent() {
+  throw new Error("Component crashed!");
+}
+    </code></pre>
+
+    <hr />
+
+    <h2>🛡️ Functional Error Boundary Usage</h2>
+    <pre><code>
+import { ErrorBoundary } from "react-error-boundary";
+
+function App() {
+  return (
+    &lt;ErrorBoundary FallbackComponent={ErrorFallback}&gt;
+      &lt;BuggyComponent /&gt;
+    &lt;/ErrorBoundary&gt;
+  );
+}
+    </code></pre>
+
+    <p>
+      ✅ Error is caught  
+      <br />
+      ✅ Fallback UI is shown  
+      <br />
+      ✅ App does not crash
+    </p>
+
+    <hr />
+
+    <h2>🧠 Easy Flow Diagram</h2>
+    <pre><code>
+Buggy Component
+     ↓ error
+ErrorBoundary (Library)
+     ↓
+Fallback UI
+    </code></pre>
+
+    <hr />
+
+    <h2>⚠️ What It Can & Cannot Catch</h2>
+    <ul>
+      <li>✅ Render errors</li>
+      <li>❌ Event handlers</li>
+      <li>❌ Async code (setTimeout, fetch)</li>
+    </ul>
+
+    <hr />
+
+    <h2>🎯 One-Line Interview Answer</h2>
+    <p>
+      Functional components do not support error boundaries directly,
+      so we use libraries like <strong>react-error-boundary</strong>
+      to handle errors safely.
+    </p>
+
+  </div>
+</div>
+
+    
 
     </section>
 
@@ -2193,7 +2562,184 @@ const handleClick = React.useCallback(() => {
 </div>
 
 
+<div class="container">
+
+  <h1>🏷️ Semantic Tags in HTML<br><small>(Easy Explanation)</small></h1>
+
+  <!-- What are Semantic Tags -->
+  <div class="card blue">
+    <h2>🔵 What are Semantic Tags?</h2>
+    <p>
+      👉 Semantic tags wo HTML tags hote hain jo <b>content ka meaning clearly batate hain</b><br>
+      👉 Ye sirf design nahi, balki <b>content ka purpose</b> batate hain
+    </p>
+    <p>🧠 Browser aur developer dono samajh pate hain</p>
+  </div>
+
+  <!-- Common Semantic Tags -->
+  <div class="card green">
+    <h2>🟢 Common Semantic Tags</h2>
+    <ul>
+      <li><b>&lt;header&gt;</b> – Top section (logo, title, menu)</li>
+      <li><b>&lt;nav&gt;</b> – Navigation links</li>
+      <li><b>&lt;main&gt;</b> – Main content of page</li>
+      <li><b>&lt;section&gt;</b> – Group of related content</li>
+      <li><b>&lt;article&gt;</b> – Independent content (blog, news)</li>
+      <li><b>&lt;aside&gt;</b> – Side content (ads, sidebar)</li>
+      <li><b>&lt;footer&gt;</b> – Bottom section (copyright, links)</li>
+    </ul>
+  </div>
+
+  <!-- Example -->
+  <div class="card orange">
+    <h2>🧪 Simple Example</h2>
+    <pre>
+&lt;header&gt;
+  &lt;h1&gt;My Website&lt;/h1&gt;
+&lt;/header&gt;
+
+&lt;nav&gt;
+  &lt;a href="#"&gt;Home&lt;/a&gt;
+&lt;/nav&gt;
+
+&lt;main&gt;
+  &lt;article&gt;
+    &lt;h2&gt;Blog Title&lt;/h2&gt;
+    &lt;p&gt;Blog content&lt;/p&gt;
+  &lt;/article&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;
+  © 2025
+&lt;/footer&gt;
+    </pre>
+  </div>
+
+  <!-- Why use -->
+  <div class="card purple">
+    <h2>🟡 Why Use Semantic Tags?</h2>
+    <ul>
+      <li>✔ Easy to understand code</li>
+      <li>✔ Better SEO</li>
+      <li>✔ Better accessibility (screen readers)</li>
+    </ul>
+  </div>
+
+  <!-- Non semantic vs semantic -->
+  <div class="card red">
+    <h2>🔴 Non-Semantic vs Semantic</h2>
+    <p>❌ <b>&lt;div&gt;, &lt;span&gt;</b> → No meaning</p>
+    <p>✅ <b>&lt;header&gt;, &lt;article&gt;</b> → Clear meaning</p>
+  </div>
+
+  <!-- One Line -->
+  <div class="card blue">
+    <h2>🎯 One-Line Interview Answer</h2>
+    <p>
+      👉 <b>Semantic tags describe the purpose of content in HTML clearly.</b>
+    </p>
+    <div>
+      <span class="tag">HTML</span>
+      <span class="tag">SEO</span>
+      <span class="tag">Accessibility</span>
+      <span class="tag">Interview</span>
+    </div>
+  </div>
+
+</div>
+<div class="container">
+  <h1>
+    Home > HTML > <span>New HTML Tags (HTML5)</span>
+  </h1>
+
+  <div class="card">
+
+    <h2>📌 What are New HTML Tags?</h2>
+    <div class="card blue">
+    <p>
+      These tags were introduced in <strong>HTML5</strong>
+      to make web pages more <strong>meaningful, readable, and SEO-friendly</strong>.
+    </p>
+
+    <hr />
+
+    <h2>🧠 Group 1: Page Structure (Semantic Tags)</h2>
+    <p>👉 These describe <strong>what the content means</strong></p>
+
+    <ul>
+      <li><code>&lt;header&gt;</code> – Top section</li>
+      <li><code>&lt;nav&gt;</code> – Menu / navigation</li>
+      <li><code>&lt;section&gt;</code> – Section of content</li>
+      <li><code>&lt;article&gt;</code> – Blog / post / news</li>
+      <li><code>&lt;aside&gt;</code> – Side content</li>
+      <li><code>&lt;footer&gt;</code> – Bottom section</li>
+      <li><code>&lt;main&gt;</code> – Main page content</li>
+    </ul>
+</div>
+ <div class="card red">
+    <p>
+      🧠 Trick to remember:  
+      <strong>Header → Nav → Main → Section → Article → Aside → Footer</strong>
+    </p>
+
+    <hr />
+
+    <h2>🧠 Group 2: Media Tags</h2>
+    <p>👉 Used for audio & video (no Flash needed)</p>
+
+    <ul>
+      <li><code>&lt;audio&gt;</code> – Play sound</li>
+      <li><code>&lt;video&gt;</code> – Play video</li>
+      <li><code>&lt;source&gt;</code> – Media source</li>
+    </ul>
+
+    <hr />
+
+    <h2>🧠 Group 3: Form & Input Helpers</h2>
+    <p>👉 Make forms smarter</p>
+
+    <ul>
+      <li><code>&lt;datalist&gt;</code> – Input suggestions</li>
+      <li><code>&lt;output&gt;</code> – Result display</li>
+      <li><code>&lt;progress&gt;</code> – Loading bar</li>
+      <li><code>&lt;meter&gt;</code> – Measurement bar</li>
+    </ul>
+
+    <hr />
+
+    <h2>🧠 Group 4: Graphics & UI</h2>
+    <ul>
+      <li><code>&lt;canvas&gt;</code> – Draw using JS</li>
+      <li><code>&lt;svg&gt;</code> – Vector graphics</li>
+      <li><code>&lt;dialog&gt;</code> – Popup / modal</li>
+      <li><code>&lt;template&gt;</code> – Hidden HTML template</li>
+    </ul>
+ </div>
+    <hr />
+ <div class="card blue">
+
+    <h2>🧠 Easiest Interview Shortcut</h2>
+    <pre><code>
+Semantic Tags → header, nav, section, article, aside, footer, main
+Media Tags    → audio, video
+Form Helpers  → datalist, progress, meter
+Graphics      → canvas, svg
+    </code></pre>
+
+    <hr />
+
+    <h2>🎯 One-Line Interview Answer</h2>
+    <p>
+      HTML5 introduced semantic, media, form, and graphics tags
+      to make web pages more meaningful and modern.
+    </p>
+ </div>
+  </div>
+</div>
+
       </div>
+
+      
 
     </section>
 

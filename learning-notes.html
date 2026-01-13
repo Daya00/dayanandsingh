@@ -1203,7 +1203,55 @@ function handle(value: unknown) {
       <!-- Paste your 31 JavaScript containers here -->
 
       <div class="unit-container">
-      
+         <div class="container">
+
+    <h1>📌 Flatten Array</h1>
+
+    <!-- Method 1 -->
+    <div class="card blue">
+      <h3>✅ Method 1: Using loop <small>(BEST for interview)</small></h3>
+
+      <pre><code>
+Here is the **same minimal recursive array-flatten code** (like in your screenshot), clean and interview-ready 👇
+
+let data = [2, 4, 6, [10, 20, 30, [300, 500, 700]]];
+let collect = [];
+
+function flatten(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    if (Array.isArray(arr[i])) {
+      flatten(arr[i]);      // recursion
+    } else {
+      collect.push(arr[i]); // collect value
+    }
+  }
+}
+
+flatten(data);
+console.log(collect);
+// [2, 4, 6, 10, 20, 30, 300, 500, 700]
+
+
+
+      </code></pre>
+    </div>
+
+   
+
+    <!-- Interview Tip -->
+    <div class="card blue">
+      <h3>🧠 One-line Interview Answer</h3>
+      <p>
+🧠 **One-line understanding:**
+
+> “If element is array → go inside again, else → store value.”
+
+Perfect for **JavaScript interview explanation**.
+      </p>
+    </div>
+
+  </div>
+
     <div class="container">
 
       <h1>

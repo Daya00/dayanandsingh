@@ -1203,6 +1203,52 @@ function handle(value: unknown) {
       <!-- Paste your 31 JavaScript containers here -->
 
       <div class="unit-container">
+
+
+          <div class="container">
+
+    <h1>📌 Flatten Object</h1>
+
+    <!-- Method 1 -->
+    <div class="card blue">
+      <h3>✅ Method 1: Using loop <small>(BEST for interview)</small></h3>
+
+      <pre><code>
+let data = {
+  tea: 10,
+  coffee: {
+    milk: 20,
+    sugar: {
+      brown: 30
+    }
+  }
+};
+
+let result = {};
+
+function flatten(obj) {
+  for (let k in obj) {
+    if (typeof obj[k] === "object") {
+      flatten(obj[k]);   // recursion
+    } else {
+      result[k] = obj[k];
+    }
+  }
+}
+
+flatten(data);
+console.log(result);
+
+
+
+      </code></pre>
+    </div>
+
+   
+
+ 
+
+  </div>
          <div class="container">
 
     <h1>📌 Flatten Array</h1>

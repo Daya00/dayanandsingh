@@ -280,29 +280,29 @@ pre ::selection {
 
     <h4>Simple Example:</h4>
 
-    <code>
+   <pre> <code>
       console.log(x); <br />
       var x = 10;
     </code>
-
+</pre>
     <p>
       ऊपर वाला code error नहीं देगा। Output होगा:
     </p>
 
-    <code>
+ <pre>   <code>
       undefined
     </code>
-
+</pre>
     <p>
       क्योंकि JavaScript इसे ऐसे समझती है:
     </p>
 
-    <code>
+  <pre>  <code>
       var x; <br />
       console.log(x); <br />
       x = 10;
     </code>
-
+</pre>
     <p>
       👉 <b>Note:</b> Hoisting सिर्फ declaration पर होता है, value assignment पर नहीं।
     </p>
@@ -318,7 +318,7 @@ pre ::selection {
       <b>var</b> hoist हो जाता है, लेकिन value नहीं जाती।
     </p>
 
-    <code>
+   <pre> <code>
       console.log(a); <br />
       var a = 5;
     </code>
@@ -328,7 +328,7 @@ pre ::selection {
     <code>
       undefined
     </code>
-
+</pre>
     <p>
       JavaScript इसे ऐसे समझती है:
     </p>
@@ -347,7 +347,7 @@ pre ::selection {
       <b>let</b> भी hoist होता है, लेकिन
       <b>use करने की permission नहीं होती</b> (TDZ).
     </p>
-
+<pre>
     <code>
       console.log(b); <br />
       let b = 10;
@@ -358,7 +358,7 @@ pre ::selection {
     <code>
       ReferenceError
     </code>
-
+</pre>
     <p>
       👉 मतलब: <b>let / const</b> को declaration से पहले
       access नहीं कर सकते।
@@ -374,7 +374,7 @@ pre ::selection {
     <p>
       Normal function पूरी तरह hoist हो जाती है।
     </p>
-
+<pre>
     <code>
       sayHello(); <br /><br />
       function sayHello() { <br />
@@ -387,6 +387,7 @@ pre ::selection {
     <code>
       Hello
     </code>
+    </pre>
   </div>
 
   <div class="card blue">
@@ -395,7 +396,7 @@ pre ::selection {
     <p>
       Function expression hoist नहीं होती।
     </p>
-
+<pre>
     <code>
       sayHi(); <br /><br />
       var sayHi = function () { <br />
@@ -408,6 +409,7 @@ pre ::selection {
     <code>
       TypeError
     </code>
+    </pre>
   </div>
 </div>
 

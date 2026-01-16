@@ -261,6 +261,157 @@ pre ::selection {
       <!-- Paste your 31 JavaScript containers here -->
 
       <div class="unit-container">
+
+        <div class="container">
+  <h1>JavaScript Hoisting (Easy Explanation)</h1>
+
+  <div class="card blue">
+    <h3>Hoisting क्या होता है?</h3>
+
+    <p>
+      JavaScript में <b>hoisting</b> का मतलब है कि
+      <b>variable</b> और <b>function</b> की declaration
+      को JavaScript अपने आप ऊपर ले जाती है।
+    </p>
+
+    <p>
+      इसलिए हम variable को declare करने से पहले भी use कर पाते हैं।
+    </p>
+
+    <h4>Simple Example:</h4>
+
+    <code>
+      console.log(x); <br />
+      var x = 10;
+    </code>
+
+    <p>
+      ऊपर वाला code error नहीं देगा। Output होगा:
+    </p>
+
+    <code>
+      undefined
+    </code>
+
+    <p>
+      क्योंकि JavaScript इसे ऐसे समझती है:
+    </p>
+
+    <code>
+      var x; <br />
+      console.log(x); <br />
+      x = 10;
+    </code>
+
+    <p>
+      👉 <b>Note:</b> Hoisting सिर्फ declaration पर होता है, value assignment पर नहीं।
+    </p>
+  </div>
+</div>
+<div class="container">
+  <h1>let vs var Hoisting (Easy)</h1>
+
+  <div class="card blue">
+    <h3>var Hoisting</h3>
+
+    <p>
+      <b>var</b> hoist हो जाता है, लेकिन value नहीं जाती।
+    </p>
+
+    <code>
+      console.log(a); <br />
+      var a = 5;
+    </code>
+
+    <p>Output:</p>
+
+    <code>
+      undefined
+    </code>
+
+    <p>
+      JavaScript इसे ऐसे समझती है:
+    </p>
+
+    <code>
+      var a; <br />
+      console.log(a); <br />
+      a = 5;
+    </code>
+  </div>
+
+  <div class="card blue">
+    <h3>let Hoisting</h3>
+
+    <p>
+      <b>let</b> भी hoist होता है, लेकिन
+      <b>use करने की permission नहीं होती</b> (TDZ).
+    </p>
+
+    <code>
+      console.log(b); <br />
+      let b = 10;
+    </code>
+
+    <p>Output:</p>
+
+    <code>
+      ReferenceError
+    </code>
+
+    <p>
+      👉 मतलब: <b>let / const</b> को declaration से पहले
+      access नहीं कर सकते।
+    </p>
+  </div>
+</div>
+<div class="container">
+  <h1>Function Hoisting</h1>
+
+  <div class="card blue">
+    <h3>Normal Function (Hoisted)</h3>
+
+    <p>
+      Normal function पूरी तरह hoist हो जाती है।
+    </p>
+
+    <code>
+      sayHello(); <br /><br />
+      function sayHello() { <br />
+      &nbsp;&nbsp;console.log("Hello"); <br />
+      }
+    </code>
+
+    <p>Output:</p>
+
+    <code>
+      Hello
+    </code>
+  </div>
+
+  <div class="card blue">
+    <h3>Function Expression (Not Hoisted)</h3>
+
+    <p>
+      Function expression hoist नहीं होती।
+    </p>
+
+    <code>
+      sayHi(); <br /><br />
+      var sayHi = function () { <br />
+      &nbsp;&nbsp;console.log("Hi"); <br />
+      }
+    </code>
+
+    <p>Output:</p>
+
+    <code>
+      TypeError
+    </code>
+  </div>
+</div>
+
+        
         <div class="container">
 
   <h1>📢 JavaScript Custom Events<br><small>(Easy & Interview-Ready)</small></h1>
